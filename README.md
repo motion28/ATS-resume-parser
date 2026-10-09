@@ -1,3 +1,4 @@
+<img width="1375" height="817" alt="Screenshot 2026-10-08 at 9 59 32 PM" src="https://github.com/user-attachments/assets/d97e5d70-a7c0-41c0-a788-53a279b6a595" />
 # ATS Resume Parser
 
 Upload a text-based PDF resume to see the contact information, skills, work
