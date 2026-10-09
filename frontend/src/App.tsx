@@ -104,37 +104,46 @@ export default function App() {
 
   return (
     <main>
-      <h1>ATS Resume Parser</h1>
-      <p className="subtitle">
-        See what an automated resume parser can extract from your resume.
-      </p>
+      <header className="page-header">
+        <p className="eyebrow">Resume extraction</p>
+        <h1>ATS Resume Parser</h1>
+        <p className="subtitle">
+          See what an automated resume parser can extract from your resume.
+        </p>
+      </header>
 
       <form className="upload-area" onSubmit={handleUpload} aria-busy={isParsing}>
         <label htmlFor="resume">Choose a PDF resume</label>
-        <input
-          id="resume"
-          type="file"
-          accept=".pdf,application/pdf"
-          disabled={isParsing}
-          aria-describedby="upload-help"
-          onChange={(event) => {
-            setFile(event.target.files?.[0] ?? null)
-            setError('')
-            setResult(null)
-          }}
-        />
+        <div className="upload-controls">
+          <input
+            id="resume"
+            type="file"
+            accept=".pdf,application/pdf"
+            disabled={isParsing}
+            aria-describedby="upload-help"
+            onChange={(event) => {
+              setFile(event.target.files?.[0] ?? null)
+              setError('')
+              setResult(null)
+            }}
+          />
+          <button type="submit" disabled={!file || isParsing}>
+            {isParsing ? 'Reading and analyzing…' : 'Upload Resume'}
+          </button>
+        </div>
+        {file && <p className="selected-filename">{file.name}</p>}
         <p id="upload-help">Use a text-based PDF. Scanned or image-only PDFs are not supported yet.</p>
-        <button type="submit" disabled={!file || isParsing}>
-          {isParsing ? 'Reading and analyzing…' : 'Upload Resume'}
-        </button>
         {isParsing && <p role="status">Reading and analyzing your PDF…</p>}
         {error && <p className="error" role="alert">{error}</p>}
       </form>
 
       {result && (
         <div className="results">
-          <p className="result-filename">{result.filename}</p>
-          <p className="result-note">Extracted information may contain mistakes. Compare these results with your original resume.</p>
+          <div className="results-header">
+            <p className="eyebrow">Extraction results</p>
+            <p className="result-filename">{result.filename}</p>
+            <p className="result-note">Extracted information may contain mistakes. Compare these results with your original resume.</p>
+          </div>
 
           {warnings.length > 0 && (
             <section className="result-section parsing-warnings" aria-labelledby="warnings-heading">
